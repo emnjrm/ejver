@@ -1,6 +1,7 @@
-import { Link, useRouter } from "@tanstack/react-router";
+import { Link, useRouter, useLocation } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import sssLogo from "@/assets/SSS_logo.svg";
+import { motion } from "framer-motion";
 
 interface Props {
   user?: { email?: string | null } | null;
@@ -9,6 +10,7 @@ interface Props {
 
 export function SssHeader({ user, isAdmin }: Props) {
   const router = useRouter();
+  const location = useLocation();
 
   async function signOut() {
     await supabase.auth.signOut();
@@ -54,42 +56,46 @@ export function SssHeader({ user, isAdmin }: Props) {
             <h1 className="text-xl sm:text-2xl font-bold tracking-tight">Social Security System</h1>
             <div className="text-xs opacity-90">Member Services Portal</div>
           </div>
-          {user && (
-            <nav className="hidden md:flex gap-1 text-sm">
-              <Link
-                to="/dashboard"
-                className="px-3 py-2 hover:bg-white/10 rounded"
-                activeProps={{ className: "px-3 py-2 bg-white/15 rounded font-semibold" }}
-              >
-                My Applications
-              </Link>
-              <Link
-                to="/apply"
-                className="px-3 py-2 hover:bg-white/10 rounded"
-                activeProps={{ className: "px-3 py-2 bg-white/15 rounded font-semibold" }}
-              >
-                Apply
-              </Link>
-              {isAdmin && (
-                <Link
-                  to="/admin"
-                  className="px-3 py-2 hover:bg-white/10 rounded"
-                  activeProps={{ className: "px-3 py-2 bg-white/15 rounded font-semibold" }}
-                >
-                  Admin
-                </Link>
-              )}
-              <Link
-                to="/settings"
-                className="px-3 py-2 hover:bg-white/10 rounded"
-                activeProps={{ className: "px-3 py-2 bg-white/15 rounded font-semibold" }}
-              >
-                Settings
-              </Link>
-            </nav>
-          )}
         </div>
       </div>
+
+      {/* Main Tab Navigation Band */}
+      {user && (
+        <div className="bg-white border-b border-gray-200">
+          <div className="max-w-6xl mx-auto px-4 flex gap-1 pt-3">
+            {[
+              { to: "/dashboard", label: "My Applications" },
+              { to: "/apply", label: "Apply" },
+              ...(isAdmin ? [{ to: "/admin", label: "Admin" }] : []),
+              { to: "/settings", label: "Settings" }
+            ].map((link) => {
+              const isActive = location.pathname.startsWith(link.to);
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`relative px-5 py-3 text-sm font-bold transition-colors rounded-t-lg
+                    ${isActive 
+                      ? "bg-white text-[#1a365d]" 
+                      : "text-gray-500 hover:text-gray-700 bg-transparent"
+                    }
+                  `}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="mainNavIndicator"
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-[#e09f3e]"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                    />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
