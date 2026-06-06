@@ -21,6 +21,13 @@ function UpdatePasswordPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+
+  const isLengthValid = password.length >= 8;
+  const hasLowercase = /[a-z]/.test(password);
+  const hasUppercase = /[A-Z]/.test(password);
+  const hasNumber = /[0-9]/.test(password);
+  const hasSymbol = /[^A-Za-z0-9]/.test(password);
 
   useEffect(() => {
     // Ensure the user actually has a session (they clicked a recovery link)
@@ -38,20 +45,8 @@ function UpdatePasswordPage() {
       toast.error("Passwords do not match");
       return;
     }
-    if (password.length < 8) {
-      toast.error("Password must be at least 8 characters long");
-      return;
-    }
-    if (!/[A-Z]/.test(password)) {
-      toast.error("Password must contain at least one uppercase letter");
-      return;
-    }
-    if (!/[0-9]/.test(password)) {
-      toast.error("Password must contain at least one number");
-      return;
-    }
-    if (!/[^a-zA-Z0-9]/.test(password)) {
-      toast.error("Password must contain at least one special character");
+    if (!isLengthValid || !hasLowercase || !hasUppercase || !hasNumber || !hasSymbol) {
+      toast.error("Please ensure your password meets all requirements.");
       return;
     }
     
@@ -79,7 +74,7 @@ function UpdatePasswordPage() {
           </div>
           <div className="p-6">
             <p className="text-sm text-muted-foreground mb-6">
-              Please enter your new secure password below. Make sure it is at least 8 characters long, and contains an uppercase letter, a number, and a special character.
+              Please enter your new secure password below.
             </p>
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
@@ -92,6 +87,8 @@ function UpdatePasswordPage() {
                     className="sss-input pr-10 font-sans normal-case tracking-normal"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onFocus={() => setIsPasswordFocused(true)}
+                    onBlur={() => setIsPasswordFocused(false)}
                   />
                   <button
                     type="button"
@@ -101,6 +98,30 @@ function UpdatePasswordPage() {
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
                 </div>
+                
+                {/* Password Requirements Popover */}
+                {(isPasswordFocused || (!isLengthValid || !hasLowercase || !hasUppercase || !hasNumber || !hasSymbol)) && password.length > 0 && (
+                  <div className="mt-2 w-full bg-white border border-gray-200 shadow-sm rounded p-4 text-xs">
+                    <p className="font-bold text-gray-500 mb-2 tracking-wide text-[10px] uppercase">Password Must</p>
+                    <ul className="space-y-1.5">
+                      <li className={`flex items-center gap-2 ${isLengthValid ? "text-green-600" : "text-gray-600"}`}>
+                        <span className="w-3 text-center">{isLengthValid ? "✓" : "•"}</span> Be at least 8 characters
+                      </li>
+                      <li className={`flex items-center gap-2 ${hasUppercase ? "text-green-600" : "text-gray-600"}`}>
+                        <span className="w-3 text-center">{hasUppercase ? "✓" : "•"}</span> Contain at least one uppercase letter
+                      </li>
+                      <li className={`flex items-center gap-2 ${hasLowercase ? "text-green-600" : "text-gray-600"}`}>
+                        <span className="w-3 text-center">{hasLowercase ? "✓" : "•"}</span> Contain at least one lowercase letter
+                      </li>
+                      <li className={`flex items-center gap-2 ${hasNumber ? "text-green-600" : "text-gray-600"}`}>
+                        <span className="w-3 text-center">{hasNumber ? "✓" : "•"}</span> Contain at least one number
+                      </li>
+                      <li className={`flex items-center gap-2 ${hasSymbol ? "text-green-600" : "text-gray-600"}`}>
+                        <span className="w-3 text-center">{hasSymbol ? "✓" : "•"}</span> Contain at least one symbol
+                      </li>
+                    </ul>
+                  </div>
+                )}
               </div>
               <div>
                 <label className="sss-label">Confirm New Password</label>

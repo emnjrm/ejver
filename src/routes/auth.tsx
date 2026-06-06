@@ -162,7 +162,7 @@ function AuthPage() {
                       <input
                         type="text"
                         required
-                        className="w-full border border-gray-300 rounded bg-white px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                        className="sss-input font-sans normal-case tracking-normal"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                         placeholder="Enter first name"
@@ -173,7 +173,7 @@ function AuthPage() {
                       <input
                         type="text"
                         required
-                        className="w-full border border-gray-300 rounded bg-white px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                        className="sss-input font-sans normal-case tracking-normal"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
                         placeholder="Enter last name"
@@ -189,7 +189,7 @@ function AuthPage() {
                       <input
                         type="email"
                         required
-                        className="w-full border border-gray-300 rounded bg-white pl-3 pr-10 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                        className="sss-input pr-10 font-sans normal-case tracking-normal"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
@@ -211,7 +211,7 @@ function AuthPage() {
                       <input
                         type="tel"
                         required
-                        className="w-full border border-gray-300 rounded bg-white px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                        className="sss-input font-sans normal-case tracking-normal"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="Enter phone number"
@@ -231,7 +231,7 @@ function AuthPage() {
                           type={showPassword ? "text" : "password"}
                           required
                           minLength={8}
-                          className="w-full border border-gray-300 rounded bg-white pl-3 pr-16 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                          className="sss-input pr-16 font-sans normal-case tracking-normal"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           onFocus={() => setIsPasswordFocused(true)}
@@ -303,7 +303,7 @@ function AuthPage() {
                         <input
                           type="date"
                           required
-                          className="w-full border border-gray-300 rounded bg-white px-3 py-2.5 text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                          className="sss-input font-sans normal-case tracking-normal"
                           value={birthdate}
                           onChange={(e) => setBirthdate(e.target.value)}
                         />
