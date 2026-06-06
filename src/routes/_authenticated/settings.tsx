@@ -72,8 +72,20 @@ function SettingsPage() {
       toast.error("Passwords do not match.");
       return;
     }
-    if (password.length < 6) {
-      toast.error("Password should be at least 6 characters.");
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      toast.error("Password must contain at least one uppercase letter.");
+      return;
+    }
+    if (!/[0-9]/.test(password)) {
+      toast.error("Password must contain at least one number.");
+      return;
+    }
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+      toast.error("Password must contain at least one special character.");
       return;
     }
     
@@ -205,7 +217,7 @@ function SettingsPage() {
                 <div className="sss-section-header rounded-t-md">Change Password</div>
                 <div className="p-6">
                   <p className="text-sm text-muted-foreground mb-6">
-                    Ensure your account is using a long, random password to stay secure.
+                    Ensure your account is using a long, random password to stay secure. Password must be at least 8 characters long, and contain an uppercase letter, a number, and a special character.
                   </p>
                   
                   <form onSubmit={handleUpdatePassword} className="space-y-4 max-w-sm">

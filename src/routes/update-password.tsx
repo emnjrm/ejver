@@ -38,6 +38,22 @@ function UpdatePasswordPage() {
       toast.error("Passwords do not match");
       return;
     }
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      toast.error("Password must contain at least one uppercase letter");
+      return;
+    }
+    if (!/[0-9]/.test(password)) {
+      toast.error("Password must contain at least one number");
+      return;
+    }
+    if (!/[^a-zA-Z0-9]/.test(password)) {
+      toast.error("Password must contain at least one special character");
+      return;
+    }
     
     setLoading(true);
     try {
@@ -57,13 +73,13 @@ function UpdatePasswordPage() {
     <div className="min-h-screen flex flex-col">
       <SssHeader />
       <main className="flex-1 flex items-start justify-center px-4 py-10 bg-gray-50/50">
-        <div className="w-full max-w-md bg-white border border-gray-200 rounded-md shadow-sm">
-          <div className="sss-section-header rounded-t-md">
+        <div className="w-full max-w-md bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+          <div className="bg-sss-section-bg border-b border-gray-200 px-6 py-4 font-bold text-sm tracking-widest text-sss-label uppercase text-center">
             Create New Password
           </div>
           <div className="p-6">
             <p className="text-sm text-muted-foreground mb-6">
-              Please enter your new secure password below. Make sure it is at least 6 characters long.
+              Please enter your new secure password below. Make sure it is at least 8 characters long, and contains an uppercase letter, a number, and a special character.
             </p>
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
@@ -72,7 +88,7 @@ function UpdatePasswordPage() {
                   <input
                     type={showPassword ? "text" : "password"}
                     required
-                    minLength={6}
+                    minLength={8}
                     className="w-full border border-sss-form-border bg-white px-3 py-2 text-sm font-sans normal-case tracking-normal focus:outline-2 focus:outline-sss-navy rounded-md"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -92,7 +108,7 @@ function UpdatePasswordPage() {
                   <input
                     type={showPassword ? "text" : "password"}
                     required
-                    minLength={6}
+                    minLength={8}
                     className="w-full border border-sss-form-border bg-white px-3 py-2 text-sm font-sans normal-case tracking-normal focus:outline-2 focus:outline-sss-navy rounded-md"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
@@ -101,7 +117,7 @@ function UpdatePasswordPage() {
               </div>
               <button
                 disabled={loading}
-                className="w-full mt-2 py-2.5 bg-sss-navy text-white text-sm font-bold tracking-wide uppercase hover:bg-sss-navy-dark disabled:opacity-60 rounded-md transition-colors"
+                className="w-full mt-4 py-3 bg-sss-navy text-white text-sm font-bold tracking-wide uppercase hover:bg-sss-navy-dark disabled:opacity-60 rounded-lg transition-colors shadow-sm"
               >
                 {loading ? "Updating..." : "Update Password"}
               </button>
