@@ -12,7 +12,7 @@ import {
 import { toast } from "sonner";
 import { Check, X, Search } from "lucide-react";
 import { ClearableInput } from "@/components/SplitInputs";
-import { formatName } from "@/lib/utils";
+import { formatName, statusBadge } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/admin")({
   head: () => ({ meta: [{ title: "Admin — SSS Portal" }] }),
@@ -123,7 +123,7 @@ function AdminPage() {
               <button
                 key={s}
                 onClick={() => setStatus(s)}
-                className={`px-3 py-1.5 border ${status === s ? "bg-sss-navy text-white border-sss-navy" : "border-sss-form-border"}`}
+                className={`px-3 py-1.5 border rounded ${status === s ? "bg-sss-navy text-white border-sss-navy" : "border-sss-form-border"}`}
               >
                 {s}
               </button>
@@ -179,7 +179,9 @@ function AdminPage() {
                       >
                         <td className="px-2 py-1.5 font-mono">{r.app_number}</td>
                         <td className="px-2 py-1.5">{formatName(r.applicant_name)}</td>
-                        <td className="px-2 py-1.5 uppercase text-xs">{r.status}</td>
+                        <td className="px-2 py-1.5 uppercase text-xs">
+                          <span className={statusBadge(r.status)}>{r.status}</span>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -206,7 +208,7 @@ function AdminPage() {
                     Employer: {detail.ap_employer_name} ({detail.ap_occupation})
                   </div>
                   <div className="text-xs uppercase pt-2">
-                    Current status: <span className="font-bold">{detail.status}</span>
+                    Current status: <span className={statusBadge(detail.status)}>{detail.status}</span>
                   </div>
 
                   {detail.status === "pending" && (

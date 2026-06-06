@@ -351,10 +351,10 @@ function ApplyPage() {
               A. Principal Applicant's Information
             </div>
             <div className="p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Field label="SS Number" required className="md:col-span-2">
+              <Field label="SS Number" required className="md:col-span-4">
                 <DigitBoxes format="##-#######-#" value={form.ap_ss_num} onChange={(v) => set("ap_ss_num", v)} required />
               </Field>
-              <Field label="Common Reference No." className="md:col-span-2">
+              <Field label="Common Reference No." className="md:col-span-4">
                 <DigitBoxes format="####-#######-#" value={form.ap_crn} onChange={(v) => set("ap_crn", v)} />
               </Field>
 
@@ -436,10 +436,10 @@ function ApplyPage() {
               B. Spouse of Principal Applicant's Information (If Applicable)
             </div>
             <div className="p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Field label="SS Number" className="md:col-span-2">
+              <Field label="SS Number" className="md:col-span-4">
                 <DigitBoxes format="##-#######-#" value={form.sp_ss_num || ""} onChange={(v) => set("sp_ss_num", v)} />
               </Field>
-              <Field label="Common Reference No." className="md:col-span-2">
+              <Field label="Common Reference No." className="md:col-span-4">
                 <DigitBoxes format="####-#######-#" value={form.sp_crn || ""} onChange={(v) => set("sp_crn", v)} />
               </Field>
 

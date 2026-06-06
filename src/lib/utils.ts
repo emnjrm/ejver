@@ -18,3 +18,12 @@ export function formatName(rawName: string | null | undefined) {
   const rest = [first, middle, suffix].filter(Boolean).join(" ");
   return rest ? `${last}, ${rest}` : last;
 }
+
+export function statusBadge(status: string) {
+  const map: Record<string, string> = {
+    pending: "bg-accent text-accent-foreground border-sss-gold",
+    approved: "bg-emerald-100 text-emerald-900 border-emerald-700",
+    rejected: "bg-red-100 text-red-900 border-red-700",
+  };
+  return `inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border rounded ${map[status] ?? ""}`;
+}

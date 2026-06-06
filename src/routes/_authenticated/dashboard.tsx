@@ -4,21 +4,12 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { SssHeader, SssFooter } from "@/components/SssHeader";
 import { listMyApplications, checkIsAdmin } from "@/lib/applications.functions";
-import { formatName } from "@/lib/utils";
+import { formatName, statusBadge } from "@/lib/utils";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({ meta: [{ title: "My Applications — SSS Portal" }] }),
   component: Dashboard,
 });
-
-function statusBadge(status: string) {
-  const map: Record<string, string> = {
-    pending: "bg-accent text-accent-foreground border-sss-gold",
-    approved: "bg-emerald-100 text-emerald-900 border-emerald-700",
-    rejected: "bg-red-100 text-red-900 border-red-700",
-  };
-  return `inline-block px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider border ${map[status] ?? ""}`;
-}
 
 function Dashboard() {
   const [user, setUser] = useState<{ email?: string | null } | null>(null);
@@ -48,7 +39,7 @@ function Dashboard() {
           </div>
           <Link
             to="/apply"
-            className="px-4 py-2 bg-sss-navy text-white text-sm font-bold uppercase tracking-wide hover:bg-sss-navy-dark"
+            className="px-4 py-2 bg-sss-navy text-white text-sm font-bold uppercase tracking-wide hover:bg-sss-navy-dark rounded"
           >
             + New Application
           </Link>
