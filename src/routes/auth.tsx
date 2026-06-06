@@ -48,7 +48,7 @@ function AuthPage() {
       return;
     }
 
-    if (mode !== "forgot_password") {
+    if (mode === "register") {
       if (!isLengthValid || !hasLowercase || !hasUppercase || !hasNumber || !hasSymbol) {
         toast.error("Please ensure your password meets all requirements.");
         return;
@@ -261,7 +261,7 @@ function AuthPage() {
                       </div>
                       
                       {/* Password Requirements Popover */}
-                      {mode !== "forgot_password" && (isPasswordFocused || (!isLengthValid || !hasLowercase || !hasUppercase || !hasNumber || !hasSymbol)) && password.length > 0 && (
+                      {mode === "register" && (isPasswordFocused || (!isLengthValid || !hasLowercase || !hasUppercase || !hasNumber || !hasSymbol)) && password.length > 0 && (
                         <div className="absolute top-full left-0 mt-2 w-full sm:w-[280px] bg-white border border-gray-200 shadow-xl rounded-md p-4 z-50 text-xs">
                           <div className="absolute -top-1.5 left-6 w-3 h-3 bg-white border-t border-l border-gray-200 rotate-45"></div>
                           <div className="relative z-10">
