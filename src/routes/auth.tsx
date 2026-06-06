@@ -136,13 +136,13 @@ function AuthPage() {
             
             {/* Dark Navy Header */}
             <div className="bg-[#1a365d] p-8 text-center border-b border-[#2a4a7f]">
-              <div className="w-16 h-16 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-inner">
-                <span className="text-[#1a365d] font-bold text-2xl italic font-serif">SSS</span>
+              <div className="w-16 h-16 bg-white rounded-full mx-auto mb-4 flex items-center justify-center shadow-inner overflow-hidden">
+                <img src="/sss_logo.png" alt="SSS Logo" className="w-full h-full object-cover" />
               </div>
-              <h2 className="text-2xl font-bold text-white mb-1 font-serif tracking-wide">
+              <h2 className="text-2xl font-bold text-white mb-1 tracking-wide">
                 {mode === "forgot_password" ? "Reset Password" : mode === "login" ? "Sign in to Portal" : "Create Account"}
               </h2>
-              <p className="text-[#a0b2c6] text-xs italic">
+              <p className="text-[#a0b2c6] text-xs">
                 Easily Access Your Records ONLINE!
               </p>
             </div>
