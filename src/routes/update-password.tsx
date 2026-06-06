@@ -56,12 +56,12 @@ function UpdatePasswordPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <SssHeader />
-      <main className="flex-1 flex items-start justify-center px-4 py-10">
-        <div className="w-full max-w-md">
-          <div className="sss-section-header">
+      <main className="flex-1 flex items-start justify-center px-4 py-10 bg-gray-50/50">
+        <div className="w-full max-w-md bg-white border border-gray-200 rounded-md shadow-sm">
+          <div className="sss-section-header rounded-t-md">
             Create New Password
           </div>
-          <div className="sss-section-body">
+          <div className="p-6">
             <p className="text-sm text-muted-foreground mb-6">
               Please enter your new secure password below. Make sure it is at least 6 characters long.
             </p>
@@ -73,7 +73,7 @@ function UpdatePasswordPage() {
                     type={showPassword ? "text" : "password"}
                     required
                     minLength={6}
-                    className="w-full border border-sss-form-border bg-white pl-3 pr-10 py-2 text-sm font-sans normal-case tracking-normal focus:outline-2 focus:outline-sss-navy focus:outline-offset-[-1px]"
+                    className="w-full border border-sss-form-border bg-white px-3 py-2 text-sm font-sans normal-case tracking-normal focus:outline-2 focus:outline-sss-navy rounded-md"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -93,7 +93,7 @@ function UpdatePasswordPage() {
                     type={showPassword ? "text" : "password"}
                     required
                     minLength={6}
-                    className="w-full border border-sss-form-border bg-white pl-3 pr-10 py-2 text-sm font-sans normal-case tracking-normal focus:outline-2 focus:outline-sss-navy focus:outline-offset-[-1px]"
+                    className="w-full border border-sss-form-border bg-white px-3 py-2 text-sm font-sans normal-case tracking-normal focus:outline-2 focus:outline-sss-navy rounded-md"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
@@ -101,7 +101,7 @@ function UpdatePasswordPage() {
               </div>
               <button
                 disabled={loading}
-                className="w-full py-2.5 bg-sss-navy text-white text-sm font-bold tracking-wide uppercase hover:bg-sss-navy-dark disabled:opacity-60"
+                className="w-full mt-2 py-2.5 bg-sss-navy text-white text-sm font-bold tracking-wide uppercase hover:bg-sss-navy-dark disabled:opacity-60 rounded-md transition-colors"
               >
                 {loading ? "Updating..." : "Update Password"}
               </button>
