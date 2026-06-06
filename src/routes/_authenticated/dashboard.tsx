@@ -42,7 +42,7 @@ function Dashboard() {
           <div>
             <h2 className="text-xl font-bold text-sss-navy-dark">My Housing Loan Applications</h2>
             <p className="text-sm text-muted-foreground">
-              Track the status of each submission. APP_NUMBER is auto-assigned per attempt.
+              Track the status of each submission. Application Number is assigned automatically.
             </p>
           </div>
           <Link

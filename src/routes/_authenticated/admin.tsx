@@ -72,9 +72,10 @@ function AdminPage() {
       result = result.filter(r => {
         const normName = (r.applicant_name || "").toLowerCase();
         const matchesName = searchWords.every(w => normName.includes(w));
+        const lowerSearch = searchTerm.toLowerCase();
         return matchesName ||
-          String(r.app_number).includes(lower) ||
-          r.ap_ss_num?.includes(lower);
+          String(r.app_number).includes(lowerSearch) ||
+          r.ap_ss_num?.includes(lowerSearch);
       });
     }
     result.sort((a, b) => {
